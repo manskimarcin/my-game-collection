@@ -1,36 +1,30 @@
 package pl.myGameCollection.userInterface;
 
-import pl.myGameCollection.searchEngine.Search;
-import pl.myGameCollection.searchEngine.SearchHLTB_URL;
-import pl.myGameCollection.searchEngine.SearchMetactitic_URL;
+import pl.myGameCollection.searchEngine.GoogleSearch;
+import pl.myGameCollection.searchEngine.Website;
 
-import java.sql.SQLOutput;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class UI {
-    private Search userInputSearch;
     private String title;
     private String platform;
+    private String hltb_URL;
+    private String metacritic_URL;
 
 
-
-    public UI(){
+    public UI() throws IOException {
         displayInfo();
         getInput();
 
-        String[] userInput = new String[]{title, platform} ;
 
-      //  Search searchHLTB_url = new SearchHLTB_URL(userInput);
-        Search searchMetactitic_url = new SearchMetactitic_URL(userInput);
-        System.out.println(searchMetactitic_url.getWebsiteURL());
+        GoogleSearch metacriticGoogleSearch = new GoogleSearch(title, platform, Website.METACRITIC);
+        metacritic_URL = metacriticGoogleSearch.getWebsiteURL();
+
+        GoogleSearch hltbGoogleSearch = new GoogleSearch(title, platform, Website.HLTB);
+        hltb_URL = hltbGoogleSearch.getWebsiteURL();
 
         /*
-        instantiate SearchHTLB_URL
-        instantiate SearchMetactritic_URL
-
-        instantiate ExtractFromMetacritic
-        instatiate ExtractFromHLTB
-
         instantiate HLTB_Info
         instantiate MetacriticInfo
 
@@ -39,7 +33,7 @@ public class UI {
 
     }
 
-    void getInput(){
+    public void getInput(){
         Scanner titleScanner = new Scanner(System.in);
         Scanner platformScanner = new Scanner(System.in);
 
@@ -52,14 +46,6 @@ public class UI {
 
     void displayInfo(){
         System.out.println("My game collection v2.0 app Marcin Manski 2019");
-    }
-
-    public Search getUserInputSearch() {
-        return userInputSearch;
-    }
-
-    public void setUserInputSearch(Search userInputSearch) {
-        this.userInputSearch = userInputSearch;
     }
 
     public String getTitle() {
@@ -78,4 +64,11 @@ public class UI {
         this.platform = platform;
     }
 
+    public String getHltb_URL() {
+        return hltb_URL;
+    }
+
+    public String getMetacritic_URL() {
+        return metacritic_URL;
+    }
 }
