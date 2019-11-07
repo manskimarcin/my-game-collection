@@ -38,10 +38,6 @@ public class GoogleSearch {
     }
 
     public String getWebsiteURL() throws IOException {
-//        String input  = "resident evil 5 ps4";
-//        String google = "http://www.google.com/search?q=";
-//        String search = google + input + " metacritic site://metacritic.com";
-//        search = search.replaceAll(" ", "+");
 
         Document document = Jsoup.connect(this.googleSeachURL).get();
 
