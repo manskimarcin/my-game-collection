@@ -20,21 +20,24 @@ public class GoogleSearch {
         this.gameTitle = title;
         this.platform = platform;
         this.website = website;
+        this.googleSeachURL = createGoogleSearchURL();
 
-        createGoogleSearchURL(this.gameTitle, this.platform, this.website);
     }
 
-    public void createGoogleSearchURL(String title, String platform, Website website){
-        String prefix = "http://www.google.com/search?q=";
-        String search = title + platform;
+    public String createGoogleSearchURL(){
+        String prefix = "https://www.google.com/search?q=";
+        String search = this.gameTitle + " " + this.platform;
         String suffix = "";
+
+        if(this.gameTitle.isEmpty() || this.platform.isEmpty())
+            return "";
 
         if(website.equals(Website.METACRITIC))
             suffix = " metacritic site://metacritic.com";
         else
             suffix = " hltb site://howlongtobeat.com/";
 
-        this.googleSeachURL = (prefix + search + suffix).replaceAll(" ", "+");
+        return  (prefix + search + suffix).replaceAll(" ", "+");
     }
 
     public String getWebsiteURL() throws IOException {
