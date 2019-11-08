@@ -13,6 +13,7 @@ public class GoogleSearch {
 
     private String gameTitle;
     private String platform;
+
     private String url;
     private Website website;
 
@@ -20,24 +21,30 @@ public class GoogleSearch {
         this.gameTitle = title;
         this.platform = platform;
         this.website = website;
+        this.googleSeachURL = createGoogleSearchURL();
 
-        createGoogleSearchURL(this.gameTitle, this.platform, this.website);
     }
 
-    public void createGoogleSearchURL(String title, String platform, Website website){
-        String prefix = "http://www.google.com/search?q=";
-        String search = title + platform;
+    public String createGoogleSearchURL(){
+        String prefix = "https://www.google.com/search?q=";
+        String search = this.gameTitle + " " + this.platform;
         String suffix = "";
+
+        if(this.gameTitle.isEmpty() || this.platform.isEmpty())
+            return "";
 
         if(website.equals(Website.METACRITIC))
             suffix = " metacritic site://metacritic.com";
         else
             suffix = " hltb site://howlongtobeat.com/";
 
-        this.googleSeachURL = (prefix + search + suffix).replaceAll(" ", "+");
+        return  (prefix + search + suffix).replaceAll(" ", "+");
     }
 
     public String getWebsiteURL() throws IOException {
+
+        if(this.googleSeachURL.isEmpty())
+            throw new IllegalArgumentException("Invalid URL");
 
         Document document = Jsoup.connect(this.googleSeachURL).get();
 
@@ -53,6 +60,41 @@ public class GoogleSearch {
 
     public String getGoogleSeachURL() {
         return googleSeachURL;
+    }
+    public void setGoogleSeachURL(String googleSeachURL) {
+        this.googleSeachURL = googleSeachURL;
+    }
+
+    public String getGameTitle() {
+        return gameTitle;
+    }
+
+    public void setGameTitle(String gameTitle) {
+        this.gameTitle = gameTitle;
+    }
+
+    public String getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Website getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(Website website) {
+        this.website = website;
     }
 
 }
