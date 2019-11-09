@@ -1,5 +1,6 @@
 package pl.myGameCollection.userInterface;
 
+import pl.myGameCollection.searchEngine.ExtractFromMetactitic;
 import pl.myGameCollection.searchEngine.GoogleSearch;
 import pl.myGameCollection.searchEngine.Website;
 
@@ -20,6 +21,8 @@ public class UI {
 
         GoogleSearch metacriticGoogleSearch = new GoogleSearch(title, platform, Website.METACRITIC);
         metacritic_URL = metacriticGoogleSearch.getWebsiteURL();
+        ExtractFromMetactitic extractFromMetactitic = new ExtractFromMetactitic(metacriticGoogleSearch);
+
 
         GoogleSearch hltbGoogleSearch = new GoogleSearch(title, platform, Website.HLTB);
         hltb_URL = hltbGoogleSearch.getWebsiteURL();
