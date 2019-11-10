@@ -46,7 +46,7 @@ public class GoogleSearch {
         if(this.googleSeachURL.isEmpty())
             throw new IllegalArgumentException("Invalid URL");
 
-        Document document = Jsoup.connect(this.googleSeachURL).get();
+        Document document = Jsoup.connect(this.googleSeachURL).timeout(4000).get();
 
         Elements sites = document.select("[class='r']");
         Element url = sites.select("a[href]").first();

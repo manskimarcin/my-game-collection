@@ -22,7 +22,7 @@ public class ExtractFromMetactitic {
 
     public ExtractFromMetactitic(GoogleSearch googleSearch) throws IOException {
         metacriticUrl = googleSearch.getWebsiteURL();
-        metacriticSourceCode = Jsoup.connect(metacriticUrl).get();
+        metacriticSourceCode = Jsoup.connect(metacriticUrl).timeout(4000).get();
         this.googleSearch = googleSearch;
         this.platform = googleSearch.getPlatform();
     }
