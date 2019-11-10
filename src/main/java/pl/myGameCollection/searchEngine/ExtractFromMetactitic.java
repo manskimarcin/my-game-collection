@@ -8,8 +8,8 @@ import java.io.IOException;
 public class ExtractFromMetactitic {
 
     private GoogleSearch googleSearch;
-    private Document metacriticSourceCode;
     private String metacriticUrl;
+    private Document metacriticSourceCode;
 
     private String gameTitle;
     private String platform;
